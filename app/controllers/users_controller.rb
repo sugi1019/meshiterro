@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(current_user.id)
+ 
   end
 
 
@@ -22,4 +23,10 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :profile_image)
   end
 
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to post_images_path
+    end
+  end
 end
